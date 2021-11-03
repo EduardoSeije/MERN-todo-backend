@@ -22,4 +22,14 @@ const getAllTodos = async (req, res) => {
   };
 };
 
-module.exports = { createTodo, getAllTodos };
+//get Todo 
+const getTodoById = async (req, res) => {
+  try {
+    const todo = await Todo.findById(req.params.id);
+    res.json(todo);
+  } catch (error) {
+    res.json(error);
+  };
+};
+
+module.exports = { createTodo, getAllTodos, getTodoById };
