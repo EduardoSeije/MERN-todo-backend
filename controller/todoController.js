@@ -43,11 +43,22 @@ const updateTodo = async (req, res) => {
       new: true,
       runValidators: true,
     });
-    res.json('Update feito com sucesso')
+    res.json('Update feito com sucesso');
 
   } catch (error) {
     res.json(error);
-  }
-}
+  };
+};
 
-module.exports = { createTodo, getAllTodos, getTodoById, updateTodo };
+// Delete todo
+
+const deleteTodo = async (req, res) => {
+  try {
+    const todoToDelete = await Todo.findByIdAndDelete(req.params.id);
+    res.json('Todo deletado com sucesso');
+  } catch (error) {
+    res.json(error);
+  };
+};
+
+module.exports = { createTodo, getAllTodos, getTodoById, updateTodo, deleteTodo };
