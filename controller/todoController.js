@@ -22,7 +22,7 @@ const getAllTodos = async (req, res) => {
   };
 };
 
-//get Todo 
+//get Todo by id 
 const getTodoById = async (req, res) => {
   try {
     const todo = await Todo.findById(req.params.id);
@@ -32,4 +32,22 @@ const getTodoById = async (req, res) => {
   };
 };
 
-module.exports = { createTodo, getAllTodos, getTodoById };
+//Update todo
+
+const updateTodo = async (req, res) => {
+  try {
+    const todoToUpdate = await Todo.findByIdAndUpdate(req.params.id, {
+      title: req.body.title,
+      description: req.body.description,
+    }, {
+      new: true,
+      runValidators: true,
+    });
+    res.json('Update feito com sucesso')
+
+  } catch (error) {
+    res.json(error);
+  }
+}
+
+module.exports = { createTodo, getAllTodos, getTodoById, updateTodo };
